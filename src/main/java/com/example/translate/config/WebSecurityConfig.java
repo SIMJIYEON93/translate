@@ -12,9 +12,11 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        http.csrf().disable()
-                .authorizeExchange(exchange -> exchange
-                        .anyExchange().permitAll());
-        return http.build();
+        return http.csrf().disable()
+                .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .anyExchange().authenticated()
+                )
+                .build();
     }
 }
