@@ -15,7 +15,7 @@ public class WebSecurityConfig {
         return http.csrf().disable()
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-                        .anyExchange().authenticated()
+                        .anyExchange().permitAll()
                 )
                 .build();
     }
